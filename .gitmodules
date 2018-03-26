@@ -1,0 +1,3 @@
+[submodule "Assets/Extension/LGK.Inspector"]
+	path = Assets/Extension/LGK.Inspector
+	url = https://github.com/NED-Studio/LGK.Inspector

@@ -29,6 +29,9 @@ namespace LGK.Inspector.Example
 
         void Build()
         {
+            var customTypeComponent = new GenericExample<CustomType>();
+            customTypeComponent.PublicGetPublicSet = new CustomType();
+
             m_InspectorService.Register(++Id, new object[] {
                     new GenericExample<bool>(),
                     new GenericExample<byte>(),
@@ -47,6 +50,7 @@ namespace LGK.Inspector.Example
                     new GenericExample<Vector2>(),
                     new GenericExample<Vector3>(),
                     new CustomDrawerTestComponent(),
+                    customTypeComponent,
                 });
         }
 
@@ -59,6 +63,11 @@ namespace LGK.Inspector.Example
         public class CustomDrawerTestComponent
         {
             public int Value = 2;
+        }
+
+        public class CustomType
+        {
+            public int Value;
         }
 
         public class GenericExample<T>

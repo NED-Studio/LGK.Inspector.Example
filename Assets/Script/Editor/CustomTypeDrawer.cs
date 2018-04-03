@@ -13,43 +13,26 @@ namespace LGK.Inspector.Example
             get { return typeof(SimpleExample.CustomType); }
         }
 
-        public override void Draw(IFieldInfo fieldInfo, object owner)
+        public override object Draw(IMemberInfo memberInfo, object memberValue)
         {
-            var value = (SimpleExample.CustomType)fieldInfo.GetValue(owner);
+            var value = (SimpleExample.CustomType)memberValue;
 
             if (value == null)
             {
-                EditorGUILayout.LabelField(fieldInfo.Name, "null (CustomType)");
-                return;
+                EditorGUILayout.LabelField(memberInfo.Name, "null (CustomType)");
             }
-
-            var newValue = EditorGUILayout.IntField(fieldInfo.Name, value.Value);
-
-            if (value.Value != newValue)
-                fieldInfo.SetValue(owner, newValue);
-        }
-
-        public override void Draw(IPropertyInfo propertyInfo, object owner)
-        {
-            var value = (SimpleExample.CustomType)propertyInfo.GetValue(owner);
-
-            if (value == null)
+            else if (memberInfo.IsReadOnly)
             {
-                EditorGUILayout.LabelField(propertyInfo.Name, "null (CustomType)");
-                return;
-            }
-
-            if (propertyInfo.IsReadOnly)
-            {
-                EditorGUILayout.LabelField(propertyInfo.Name, value.ToString());
+                EditorGUILayout.LabelField(memberInfo.Name, value.ToString());
             }
             else
             {
-                var newValue = EditorGUILayout.IntField(propertyInfo.Name, value.Value);
+                value.Value = EditorGUILayout.IntField(memberInfo.Name, value.Value);
 
-                if (value.Value != newValue)
-                    propertyInfo.SetValue(owner, newValue);
+                return value;
             }
+
+            return memberValue;
         }
     }
 }

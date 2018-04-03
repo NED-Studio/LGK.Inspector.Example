@@ -70,11 +70,32 @@ namespace LGK.Inspector.Example
             public int Value;
         }
 
+        public class NestedLevel1<T>
+        {
+            public T Nested1Field;
+
+            public T Nested1Property { get; set; }
+
+            public NestedLevel2<T> NestedLevel2 = new NestedLevel2<T>(); 
+        }
+
+        public class NestedLevel2<T>
+        {
+            public T Nested2Field;
+
+            public T Nested2Property { get; set; }
+        }
+
         public class GenericExample<T>
         {
             private T privateValue;
             private T internalValue;
             private T publicValue;
+
+            private T[] arrayValuesNull;
+            private T[] arraValues = new T[5];
+
+            public NestedLevel1<T> NestedField = new NestedLevel1<T>();
 
             public T BoolGetOnly
             {
@@ -85,6 +106,8 @@ namespace LGK.Inspector.Example
             {
                 set { privateValue = value; }
             }
+
+            public NestedLevel1<T> NestedProperty { get; set; }
 
             public T PriveSetPrivateGet { private get; set; }
 

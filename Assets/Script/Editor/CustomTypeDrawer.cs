@@ -13,21 +13,21 @@ namespace LGK.Inspector.Example
             get { return typeof(SimpleExample.CustomType); }
         }
 
-        public override object Draw(IMemberInfo memberInfo, object memberValue)
+        public override object Draw(IMemberInfo memberInfo, object memberValue, string label)
         {
             var value = (SimpleExample.CustomType)memberValue;
 
             if (value == null)
             {
-                EditorGUILayout.LabelField(memberInfo.Name, "null (CustomType)");
+                EditorGUILayout.LabelField(label, "null (CustomType)");
             }
             else if (memberInfo.IsReadOnly)
             {
-                EditorGUILayout.LabelField(memberInfo.Name, value.ToString());
+                EditorGUILayout.LabelField(label, value.ToString());
             }
             else
             {
-                value.Value = EditorGUILayout.IntField(memberInfo.Name, value.Value);
+                value.Value = EditorGUILayout.IntField(label, value.Value);
 
                 return value;
             }

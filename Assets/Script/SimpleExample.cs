@@ -13,6 +13,9 @@ namespace LGK.Inspector.Example
         // Use this for initialization
         void Start()
         {
+            UnityEngine.Debug.Log(typeof(NestedLevel2<bool>).IsValueType);
+            UnityEngine.Debug.Log(typeof(NestedLevel2<bool>).IsEnum);
+
             m_InspectorService = new UnityInspectorService();
 
             Build();
@@ -79,7 +82,7 @@ namespace LGK.Inspector.Example
             public NestedLevel2<T> NestedLevel2 = new NestedLevel2<T>(); 
         }
 
-        public class NestedLevel2<T>
+        public struct NestedLevel2<T>
         {
             public T Nested2Field;
 
